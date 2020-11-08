@@ -108,15 +108,3 @@ class Document(object):
             sauf forme {'titre' : rx}
         '''
         return {self.key : self.rx_dict.get(self.key)}
-
-
-if __name__=="__main__":
-    parser = PdfParser()
-    arc = Document('ARC', 'titre')
-    arc.add_pattern('client',r'Livré à:\s+(?P<client_livre>\d+)\s+Commandé par : (?P<client_cde>\d+)$')
-    arc.add_pattern('titre', r'CONFIRMATION DE LA COMMANDE N°(?P<cde_no>\d+) Du  (?P<date_arc>\d{2}/\d{2}/\d{4})')
-    arc.add_pattern('ref_client', r'Votre réf.: (?P<ref_client>\w*)\s*\|$')
-    arc.add_pattern('total_ht', r'\|TOTAL H.T.\s*(?P<total_ht>\d*,\d*)\|')
-    parser.add_document(arc)
-    results = parser.parse('q:\\OLFA\\pdf2meta\\Exemples\\AD20201106155156.pdf')
-    print(results)
