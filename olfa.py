@@ -2,6 +2,10 @@
 # -*- coding:utf-8 -*
 
 from pdf2meta import *
+from FUTIL.my_logging import *
+
+my_logging(console_level = DEBUG, logfile_level = INFO, details = True)
+logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
 parser = PdfParser()
 

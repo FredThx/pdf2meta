@@ -22,12 +22,8 @@ Usage :
 
 '''
 from pdfminer.high_level import extract_text
-import re
+import re, logging
 
-from FUTIL.my_logging import *
-
-my_logging(console_level = DEBUG, logfile_level = INFO, details = True)
-logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
 class PdfParser(object):
     '''Un parser de pdf
