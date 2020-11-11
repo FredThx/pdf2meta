@@ -23,7 +23,7 @@ Usage :
 '''
 from pdfminer.high_level import extract_text
 import re, logging
-
+logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
 class PdfParser(object):
     '''Un parser de pdf
