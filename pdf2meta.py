@@ -89,9 +89,12 @@ class PdfParser(object):
         if self.metadata:
             trailer = PdfReader(self.filename)
             for key, fstring in self.document.metadata.items():
-                value = fstring.format(**self.metadata)
-                cmd = f'trailer.Info.{key} = "{value}"'
-                exec(cmd)
+                try:
+                    value = fstring.format(**self.metadata)
+                    cmd = f'trailer.Info.{key} = "{value}"'
+                    exec(cmd)
+                except KeyError as e:
+                    logging.warning(f"Error on metadata : {e} is missing")
             PdfWriter(filename or self.filename, trailer=trailer).write()
         else:
             logging.warning("Non metadata yet found.")
